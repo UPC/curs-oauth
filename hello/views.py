@@ -1,17 +1,7 @@
 from django.shortcuts import render,redirect
 from requests_oauthlib import OAuth2Session
+import constants
 
-# GOOGLE
-google_client_id="xxx"
-google_client_secret="yyy"
-google_scope = [
-    "https://www.googleapis.com/auth/userinfo.email",
-    "https://www.googleapis.com/auth/userinfo.profile",
-]
-url_login="https://accounts.google.com/o/oauth2/v2/auth"
-url_token="https://accounts.google.com/o/oauth2/v2/auth"
-
-url_callback="http://localhost:8000/oauth2callback"
 
 def index(request):
     context = {
@@ -24,18 +14,18 @@ def index(request):
 
 def login(request):
     google = OAuth2Session(
-        client_id=google_client_id,
-        redirect_uri=url_callback,        
-        scope=google_scope)
-    authorization_url, state = google.authorization_url(url_login,url_callback)
+        client_id=constants.google_client_id,
+        redirect_uri=constants.url_callback,        
+        scope=constants.google_scope)
+    authorization_url, state = google.authorization_url(constants.url_login,constants.url_callback)
 
     # State is used to prevent CSRF, keep this for later.
     return redirect(authorization_url)
 
 def oauth2callback(request):
-    google = OAuth2Session(google_client_id)
-    token = google.fetch_token(token_url, client_secret=google.client_secret,
-                               authorization_response=request.url)
+    google = OAuth2Session(constants.google_client_id)
+    token = google.fetch_token(constants.token_url, client_secret=google.client_secret,
+                               authorization_response=constants.request.url)
     context = {
         'name': token
     }
