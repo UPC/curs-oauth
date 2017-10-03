@@ -15,7 +15,7 @@ def index(request):
 def login(request):
     google = OAuth2Session(
         client_id=constants.google_client_id,
-        redirect_uri=constants.url_callback,        
+        redirect_uri=constants.url_callback,
         scope=constants.google_scope)
     authorization_url, state = google.authorization_url(constants.url_login,constants.url_callback)
 
@@ -23,10 +23,20 @@ def login(request):
     return redirect(authorization_url)
 
 def oauth2callback(request):
-    google = OAuth2Session(constants.google_client_id)
-    token = google.fetch_token(constants.token_url, client_secret=google.client_secret,
-                               authorization_response=constants.request.url)
+    google = OAuth2Session(
+        client_id=constants.google_client_id,
+        redirect_uri=constants.url_callback)
+    code=request.GET['code']
+    print code
+    token = google.fetch_token(constants.url_token, client_secret=constants.google_client_secret,
+                               code=code)
+
+    google = OAuth2Session(
+        client_id=constants.google_client_id,
+        token=token)
+    user_profile=google.get(constants.url_user_profile).json()
+
     context = {
-        'name': token
+        'name': user_profile['name']
     }
     return render(request,'hello/hello.html',context)
