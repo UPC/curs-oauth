@@ -1,20 +1,31 @@
-Curs OAuth
-----------
+Per fer funcionar el que hi ha al repositori, simplement hem de fer
+
+```
+$ pip install -r requirements.txt
+$ python manage.py runserver
+```
+
+De totes formes, l'important es com desevolupat cadascuna de les aplicacions
+
+
+Pas a Pas
+=========
 
 Primer de tot, configurem l'entorn de Django
 
-- Creem un fitxer requirements.txt amb Django
+- Creem un fitxer requirements.txt que digui Django i l'instalem
 ```
 $ pip install -r requirements.txt
+```
+- I seguidament creem l'aplicació pare 
+```
 $ django-admin startproject curs
 ```
 
-Hello
------
+Aplicació Hello
+---------------
 
-Aplicació Hello World de Django
-
-Segueixo aixo:
+Segueixo aixo com a guia:
 
 https://docs.djangoproject.com/en/1.11/intro/tutorial01/
 ```
