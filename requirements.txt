@@ -1,0 +1,3 @@
+requests_oauthlib
+django
+django-cas-client
