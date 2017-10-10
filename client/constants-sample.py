@@ -1,6 +1,6 @@
 # GOOGLE
-google_client_id="407540107777-fglmute09u7vvk7p1rd504mf0hqj97i9.apps.googleusercontent.com"
-google_client_secret="XhASSDNvRiXf4vkYsKYQ2E1m"
+google_client_id="yyy"
+google_client_secret="xxx"
 google_scope = [
     "https://www.googleapis.com/auth/userinfo.email",
     "https://www.googleapis.com/auth/userinfo.profile",
